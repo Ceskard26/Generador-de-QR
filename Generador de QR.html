@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Código QR</title>
+    <!-- Incluye la librería QRCode.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- Agrega los estilos CSS aquí -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #qrcode {
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Genera tu Código QR</h1>
+
+    <!-- Contenedor donde se mostrará el código QR -->
+    <div id="qrcode"></div>
+
+    <!-- Campo de texto para ingresar la URL -->
+    <input type="text" id="url" placeholder="Ingresa la URL" />
+
+    <!-- Botón para generar el código QR -->
+    <button onclick="generateQRCode()">Generar QR</button>
+
+    <script>
+        // Función para generar el código QR
+        function generateQRCode() {
+            var url = document.getElementById("url").value; // Obtén la URL ingresada
+            var qrcodeContainer = document.getElementById("qrcode");
+            qrcodeContainer.innerHTML = ""; // Limpia cualquier código QR previo
+
+            // Genera el código QR con menos píxeles (menos densidad)
+            var qrcode = new QRCode(qrcodeContainer, {
+                text: url, // La URL que será convertida a código QR
+                width: 128, // Ancho del código QR
+                height: 128, // Alto del código QR
+                correctLevel: QRCode.CorrectLevel.L // Nivel más bajo de corrección de errores para reducir los píxeles
+            });
+        }
+    </script>
+</body>
+</html>
